@@ -1,6 +1,7 @@
 # vue-map-todo
 
-> A Vue.js project
+> Projeto usando VueJs, VueResouce, VueRouter, Maps, e login com JWT
+>ToDo List para incluir lugares já visitados e mostrando como uma lista de lugares
 
 ## Build Setup
 
