@@ -1,20 +1,23 @@
+
 <template>
   <div class="col-md-6 col-md-offset-3">
-    <h4>Cadastre um lugar que você já foi e deixe um comentário</h4>
+
+
+    <h4 @click="map()">Cadastre um lugar que você já foi e deixe um comentário</h4>
     <div class="alert alert-danger" v-if="error">
       <p>{{ error }}</p>
     </div>
-    <form class="" @submit.prevent="salva()">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Entre com o titulo" v-model="lugares.titulo">
       </div>
+      <input id="pac-input" class="" type="text" placeholder="Search Box" v-model="lugares.mapa">
+      <div id="map" style="height:200px;margin-bottom:20px;"></div>
       <div class="form-group">
         <textarea class="form-control" rows="3" placeholder="Entre com a descrição" v-model="lugares.descricao"></textarea>
       </div>
-      <button class="btn btn-primary" type="submit">Salvar</button>
-    </form>
+      <button class="btn btn-primary" @click="submit()">Salvar</button>
   </div>
-<template>
+</template>
 
 <script lang="babel">
 import auth from '../auth'
@@ -24,23 +27,85 @@ export default {
     return {
       lugares: {
         titulo: '',
-        descricao: ''
+        descricao: '',
+        mapa: ''
       },
       error: ''
     }
   },
+  ready() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -33.8688, lng: 151.2195},
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    console.log(input);
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // Clear out the old markers.
+      markers.forEach(function(marker) {
+        marker.setMap(null);
+      });
+      markers = [];
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        var icon = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
+
+        // Create a marker for each place.
+        markers.push(new google.maps.Marker({
+          map: map,
+          icon: icon,
+          title: place.name,
+          position: place.geometry.location
+        }));
+
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+  },
   methods: {
 
-    salva() {
+    submit() {
       var place = {
-        titulo = this.lugares.titulo,
-        descricao: this.lugares.descricao
+        titulo: this.lugares.titulo,
+        descricao: this.lugares.descricao,
+        mapa: document.getElementById('pac-input').value
       }
       console.log(place)
     }
   }
-
-
 }
 </script>
