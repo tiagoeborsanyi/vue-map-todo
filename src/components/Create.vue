@@ -10,7 +10,7 @@
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Entre com o titulo" v-model="lugares.titulo">
       </div>
-      <input id="pac-input" class="" type="text" placeholder="Search Box" v-model="lugares.mapa">
+      <input id="pac-input" class="" type="text" placeholder="Busque um lugar" v-model="lugares.endereco">
       <div id="map" style="height:200px;margin-bottom:20px;"></div>
       <div class="form-group">
         <textarea class="form-control" rows="3" placeholder="Entre com a descrição" v-model="lugares.descricao"></textarea>
@@ -28,7 +28,7 @@ export default {
       lugares: {
         titulo: '',
         descricao: '',
-        mapa: ''
+        endereco: ''
       },
       error: ''
     }
@@ -91,12 +91,12 @@ export default {
       var item = {
         titulo: this.lugares.titulo,
         descricao: this.lugares.descricao,
-        mapa: document.getElementById('pac-input').value
+        endereco: document.getElementById('pac-input').value
       }
       var temp;
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({
-        'address': item.mapa
+        'address': item.endereco
       }, function (result, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           item.local = result[0];
@@ -105,6 +105,7 @@ export default {
           console.log('erro geocode.');
         }
       });
+      //console.log(item);
     }
   }
 }
