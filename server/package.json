@@ -1,0 +1,29 @@
+{
+  "name": "vue-map-server",
+  "version": "1.0.0",
+  "description": "servidor para conversar com o front do vuejs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "bookshelf",
+    "kenex",
+    "postgree"
+  ],
+  "author": "Tiago Emerick Borsanyi",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "bookshelf": "^0.9.5",
+    "bookshelf-bcrypt": "^2.0.0",
+    "bookshelf-uuid": "^1.0.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "express-load": "^1.1.15",
+    "knex": "^0.11.5",
+    "method-override": "^2.3.6",
+    "pg": "^5.1.0"
+  }
+}
