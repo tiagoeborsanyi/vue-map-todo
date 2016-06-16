@@ -20,5 +20,5 @@ module.exports = () => {
     .then('routes')
     .into(app)
 
-  return app    
+  return app
 }

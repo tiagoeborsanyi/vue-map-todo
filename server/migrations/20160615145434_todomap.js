@@ -6,7 +6,7 @@ exports.up = (knex, Promise) => {
     table.uuid('id').primary()
     table.string('login').unique().notNullable()
     table.string('password').notNullable()
-    table.timestamps
+    table.timestamps()
   }).createTable('item', (table) => {
     table.uuid('id').primary()
     table.string('titulo').notNullable()
