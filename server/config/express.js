@@ -2,6 +2,7 @@
 
 let express = require('express');
 let bodyParser = require('body-parser')
+let cors = require('cors')
 
 let load = require('express-load')
 
@@ -14,6 +15,7 @@ module.exports = () => {
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(bodyParser.json())
   app.use(require('method-override')())
+  app.use(cors())
 
   load('models', {cwd: 'app'})
     .then('controllers')

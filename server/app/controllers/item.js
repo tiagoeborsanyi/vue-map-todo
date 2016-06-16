@@ -6,7 +6,7 @@ module.exports = (app) => {
   let controller = {}
 
   controller.listarItens = (req, res) => {
-    res.json({retorno: 'retournou com sucesso!!!!!'})
+    res.status(200).send({retorno: 'retournou com sucesso!!!!!'})
   }
 
   return controller
