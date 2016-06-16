@@ -6,6 +6,12 @@
 ## Build Setup
 
 ``` bash
+#install dependencies of server node
+cd server/
+npm install
+node server
+
+#em seguida abra outro terminal e execute os passos abaixo
 # install dependencies
 npm install
 
