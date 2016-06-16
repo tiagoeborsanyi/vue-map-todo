@@ -18,9 +18,9 @@
       this.$http.get('http://localhost:3000/v1/itens', (data) => {
         this.resultado = data.retorno
         console.log(data.retorno)
-      }, {
+      }/*, {
         headers: auth.getAuthHeader()
-      }).error((err) => console.log(err))
+      }*/).error((err) => console.log(err))
     },
     methods: {
       getItens() {
@@ -28,11 +28,11 @@
       }
     },
 
-    route: {
+    /*route: {
       canActivate() {
         return auth.user.authenticated
       }
-    }
+    }*/
 
   }
 </script>

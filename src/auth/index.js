@@ -15,6 +15,7 @@ export default {
       localStorage.setItem('id_token', data.token)
 
       this.user.authenticated = true
+      this.user.id = data.id
 
       if (redirect) {
         router.go(redirect)

@@ -93,13 +93,14 @@ export default {
         descricao: this.lugares.descricao,
         endereco: document.getElementById('pac-input').value
       }
-      var temp;
+      //var temp;
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({
         'address': item.endereco
       }, function (result, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           item.local = result[0];
+          item.user = auth.user.id;
           console.log(item);
         }else{
           console.log('erro geocode.');

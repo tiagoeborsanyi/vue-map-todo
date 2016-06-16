@@ -26,7 +26,8 @@ module.exports = (app) => {
       .then((isValid) => {
         if (isValid) {
           res.json({
-            token: jwt.sign({ id: user.id }, JWT_KEY)
+            token: jwt.sign({ id: user.id }, JWT_KEY),
+            id: user.id
           })
         } else {
           res.json(Boom.unauthorized())
