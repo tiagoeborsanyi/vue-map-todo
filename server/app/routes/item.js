@@ -1,6 +1,6 @@
 'use strict'
 
-let expressjwt = require('express-jwt')
+let jwt = require('express-jwt')
 
 module.exports = (app) => {
 
@@ -12,9 +12,9 @@ module.exports = (app) => {
   app.route('/v1/itens')
     .get(controller.listarItens)
 
-app.use('/v1/create', expressjwt({secret: 'vue and jwt'}))
+  app.use('/v1/create', jwt({secret: 'vue and jwt'}))
 
-  app.route('v1/create')
+  app.route('/v1/create/item')
     .post(controller.criarItem)
 
 }

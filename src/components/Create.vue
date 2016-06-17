@@ -20,6 +20,7 @@
 </template>
 
 <script lang="babel">
+import { router } from '../index'
 import auth from '../auth'
 
 export default {
@@ -88,6 +89,7 @@ export default {
   methods: {
 
     submit() {
+      var self = this;
       var item = {
         titulo: this.lugares.titulo,
         descricao: this.lugares.descricao,
@@ -100,8 +102,11 @@ export default {
       }, function (result, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           item.local = result[0];
-          item.user = auth.user.id;
+          item.author_id = auth.user.id;
           console.log(item);
+          self.$http.post('http://localhost:3000/v1/create/item', item).then((response) => {
+            console.log(response)
+          }, (err) => console.log(err))
         }else{
           console.log('erro geocode.');
         }

@@ -10,6 +10,8 @@ Vue.use(VueResource)
 Vue.use(VueRouter)
 
 import auth from './auth'
+Vue.http.options.emulateJSON = true;
+Vue.http.options.emulateHTTP = true;
 Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token')
 
 export var router = new VueRouter()

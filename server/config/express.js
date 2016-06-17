@@ -2,6 +2,7 @@
 
 let express = require('express');
 let bodyParser = require('body-parser')
+let jwt = require('express-jwt')
 let cors = require('cors')
 
 let load = require('express-load')

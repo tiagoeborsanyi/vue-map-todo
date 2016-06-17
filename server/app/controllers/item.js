@@ -2,7 +2,7 @@
 
 module.exports = (app) => {
 
-  //let Item = app.models.Item
+  let Item = app.models.item
   let controller = {}
 
   controller.listarItens = (req, res) => {
@@ -10,7 +10,16 @@ module.exports = (app) => {
   }
 
   controller.criarItem = (req, res) => {
-    
+    //console.log(req.body);
+    Item.forge(req.body)
+      .save()
+      .then((item) => {
+        res.json(item)
+
+      }, (err) => {
+        res.json(err)
+        console.log(err)
+      })
   }
 
   return controller
