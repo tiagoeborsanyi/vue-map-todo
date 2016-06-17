@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-4 col-sm-offset-4">
-    <h2>Log In</h2>
-    <p>Faça login para inserir um ponto que você já visitou.</p>
+    <h2>Sign Up</h2>
+    <p>Faça cadastro para poder adicionar locais que você visitou.</p>
     <div class="alert alert-danger" v-if="error">
       <p>{{ error }}</p>
     </div>
@@ -9,15 +9,15 @@
       <input
         type="text"
         class="form-control"
-        placeholder="entre com seu login"
-        v-model="credentials.login"
+        placeholder="Entre com um login"
+        v-model="credentials.username"
       >
     </div>
     <div class="form-group">
       <input
         type="password"
         class="form-control"
-        placeholder="entre com sua senha"
+        placeholder="Entre com sua senha"
         v-model="credentials.password"
       >
     </div>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       credentials: {
-        login: '',
+        username: '',
         password: ''
       },
       error: ''
@@ -39,13 +39,8 @@ export default {
   },
   methods: {
     submit() {
-      var credentials = {
-        login: this.credentials.login,
-        password: this.credentials.password
-      }
-      auth.login(this, credentials, 'home')
+
     }
   }
-
 }
 </script>
