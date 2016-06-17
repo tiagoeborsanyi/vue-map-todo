@@ -6,7 +6,14 @@ module.exports = (app) => {
   let controller = {}
 
   controller.listarItens = (req, res) => {
-    res.status(200).send({retorno: 'retournou com sucesso!!!!!'})
+    //res.status(200).send({retorno: 'retournou com sucesso!!!!!'})
+    Item.forge()
+      .fetchAll()
+      .then((itens) => {
+        res.json(itens)
+      }, (err) => {
+        res.json(err)
+      })
   }
 
   controller.criarItem = (req, res) => {
@@ -21,6 +28,7 @@ module.exports = (app) => {
         console.log(err)
       })
   }
+
 
   return controller
 
