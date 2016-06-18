@@ -15,6 +15,9 @@ Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_
 Vue.http.options.emulateJSON = true;
 Vue.http.options.emulateHTTP = true;
 
+//verificar se o usuario esta autenticado para determinada rota ou não
+auth.checkAuth()
+
 export var router = new VueRouter()
 
 router.map({

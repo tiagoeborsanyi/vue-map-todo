@@ -113,6 +113,11 @@ export default {
       });
       //console.log(item);
     }
+  },
+  route: {
+    canActivate() {
+      return auth.user.authenticated
+    }
   }
 }
 </script>
