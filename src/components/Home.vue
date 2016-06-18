@@ -5,7 +5,7 @@
         <div v-if="user.authenticated">
           <div class="col-md-4">
             <div class="thumbnail">
-              <img v-bind:src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location="+item.local.geometry.location+"&key=AIzaSyCh0etpX30AJEq9ln7cEnuAkVJ6ka-blNY" alt="">
+              <img v-bind:src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location="+item.local.geometry.location+"&key=YOUR_KEY" alt="">
               <div class="caption">
                 <a href="">
                   <h3>{{item.titulo}}</h3>
@@ -19,7 +19,7 @@
         <div v-else>
           <div class="col-md-4">
             <div class="thumbnail">
-              <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{item.local.geometry.location}}&key=AIzaSyCh0etpX30AJEq9ln7cEnuAkVJ6ka-blNY" alt="">
+              <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{item.local.geometry.location}}&key=YOUR_KEY" alt="">
               <div class="caption">
                 <h3>{{item.titulo}}</h3>
                 <p>{{item.endereco}}</p>
