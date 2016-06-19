@@ -3,7 +3,7 @@
     <div class="row">
       <div v-for="item in itens">
         <div v-if="user.authenticated && user.id == item.author_id">
-          <div class="col-md-4">
+          <div class="col-md-4" style="height:300px">
             <div class="thumbnail">
               <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{item.local.geometry.location}}&key=AIzaSyCh0etpX30AJEq9ln7cEnuAkVJ6ka-blNY" alt="">
               <div class="caption">
@@ -17,7 +17,7 @@
           </div>
         </div>
         <div v-else>
-          <div class="col-md-4">
+          <div class="col-md-4" style="height:300px">
             <div class="thumbnail">
               <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{item.local.geometry.location}}&key=AIzaSyCh0etpX30AJEq9ln7cEnuAkVJ6ka-blNY" alt="">
               <div class="caption">

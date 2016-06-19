@@ -17,12 +17,12 @@
       </div>
       <button class="btn btn-primary" @click="submit()">Salvar</button>
   </div>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh0etpX30AJEq9ln7cEnuAkVJ6ka-blNY&libraries=places" async defer></script>
 </template>
 
 <script lang="babel">
 import { router } from '../index'
 import auth from '../auth'
+import chaves from './../../chaves'
 
 export default {
   data() {
