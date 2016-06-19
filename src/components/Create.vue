@@ -117,7 +117,7 @@ export default {
             self.lugares.endereco = ''
           }, (err) => {
             console.log(err)
-            self.error('Erro para incluir item');
+            self.error = 'Erro para incluir item'
           })
         }else{
           console.log('erro geocode.');

@@ -5,12 +5,15 @@
     <div class="alert alert-danger" v-if="error">
       <p>{{ error }}</p>
     </div>
+    <div class="alert alert-success" v-if="sucesso">
+      <p>{{ sucesso }}</p>
+    </div>
     <div class="form-group">
       <input
         type="text"
         class="form-control"
         placeholder="Entre com um login"
-        v-model="credentials.username"
+        v-model="credentials.login"
       >
     </div>
     <div class="form-group">
@@ -31,15 +34,25 @@ export default {
   data() {
     return {
       credentials: {
-        username: '',
+        login: '',
         password: ''
       },
-      error: ''
+      error: '',
+      sucesso: ''
     }
   },
   methods: {
     submit() {
-
+      let self = this
+      let users = {
+        login: this.credentials.login,
+        password: this.credentials.password
+      }
+      this.$http.post('http://localhost:3000/v1/signup', users).then((response) => {
+        this.sucesso = 'Usuário criado com sucesso.'
+      }, (err) => {
+        this.error = 'Erro para criar usuário.'
+      })
     }
   }
 }
