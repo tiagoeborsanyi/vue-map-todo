@@ -1,6 +1,14 @@
 <template>
   <div class="col-md-6 col-md-offset-3">
     <div class="row">
+      <div class="alert alert-danger" v-if="error">
+        <p>{{ error }}</p>
+      </div>
+      <div class="alert alert-success" v-if="sucesso">
+        <p>{{ sucesso }}</p>
+      </div>
+    </div>
+    <div class="row">
       <div v-for="item in itens">
         <div v-if="user.authenticated && user.id == item.author_id">
           <div class="col-md-4" style="height:300px">
@@ -41,7 +49,9 @@
       return {
         itens: '',
         photo: '',
-        user: auth.user
+        user: auth.user,
+        error: '',
+        sucesso: ''
       }
     },
     ready() {
@@ -59,7 +69,14 @@
     },
     methods: {
       deletar(id) {
-        console.log(id);
+        //alert(id);
+        this.$http.delete('http://localhost:3000/v1/delete/'+id).then((result) => {
+          this.sucesso = 'Item deletado com sucesso.'
+          console.log(result);
+        }, (err) => {
+          this.error = 'Erro ao deletar item.'
+          console.log(err);
+        })
       }
     }
 

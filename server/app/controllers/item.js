@@ -29,6 +29,17 @@ module.exports = (app) => {
       })
   }
 
+  controller.removeItem = (req, res) => {
+    console.log(req.params.id);
+    Item.forge({id: req.params.id})
+      .destroy()
+      .then((response) => {
+        res.json(response)
+      }, (err) => {
+        res.json(err)
+      })
+  }
+
 
   return controller
 

@@ -15,4 +15,7 @@ module.exports = (app) => {
   app.route('/v1/create/item')
     .post(controller.criarItem)
 
+  app.route('/v1/delete/:id')
+    .delete(controller.removeItem)
+
 }
