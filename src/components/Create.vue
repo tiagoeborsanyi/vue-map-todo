@@ -7,6 +7,9 @@
     <div class="alert alert-danger" v-if="error">
       <p>{{ error }}</p>
     </div>
+    <div class="alert alert-success" v-if="sucesso">
+      <p>{{ sucesso }}</p>
+    </div>
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Entre com o titulo" v-model="lugares.titulo">
       </div>
@@ -32,7 +35,8 @@ export default {
         descricao: '',
         endereco: ''
       },
-      error: ''
+      error: '',
+      sucesso: ''
     }
   },
   ready() {
@@ -107,7 +111,14 @@ export default {
           console.log(item);
           self.$http.post('http://localhost:3000/v1/create/item', item).then((response) => {
             console.log(response)
-          }, (err) => console.log(err))
+            self.sucesso = 'Sucesso para incluir item'
+            self.lugares.titulo = ''
+            self.lugares.descricao = ''
+            self.lugares.endereco = ''
+          }, (err) => {
+            console.log(err)
+            self.error('Erro para incluir item');
+          })
         }else{
           console.log('erro geocode.');
         }
