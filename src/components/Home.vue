@@ -57,7 +57,7 @@
     ready() {
       this.itens = []
       let self = this
-      this.$http.get('http://localhost:3000/v1/itens').then((data) => {
+      this.$http.get(auth.api.url+'v1/itens').then((data) => {
         this.itens = data.data
         console.log(data.data[0].local.geometry.location)
       }, (err) => console.log(err))
@@ -70,7 +70,7 @@
     methods: {
       deletar(id) {
         //alert(id);
-        this.$http.delete('http://localhost:3000/v1/delete/'+id).then((result) => {
+        this.$http.delete(auth.api.url+'v1/delete/'+id).then((result) => {
           this.sucesso = 'Item deletado com sucesso.'
           console.log(result);
         }, (err) => {

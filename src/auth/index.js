@@ -6,6 +6,10 @@ const SIGNUP_URL = API_URL + 'v1/signup'
 
 export default {
 
+  api:{
+    url: 'http://localhost:3000/'
+  },
+
   user: {
     authenticated: false
   },

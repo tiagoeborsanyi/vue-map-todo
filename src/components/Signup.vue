@@ -48,7 +48,7 @@ export default {
         login: this.credentials.login,
         password: this.credentials.password
       }
-      this.$http.post('http://localhost:3000/v1/signup', users).then((response) => {
+      this.$http.post(auth.api.url+'v1/signup', users).then((response) => {
         this.sucesso = 'Usuário criado com sucesso.'
       }, (err) => {
         this.error = 'Erro para criar usuário.'

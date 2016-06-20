@@ -108,7 +108,7 @@ export default {
           item.local = result[0];
           item.author_id = auth.user.id;
           console.log(item);
-          self.$http.post('http://localhost:3000/v1/create/item', item).then((response) => {
+          self.$http.post(auth.api.url+'v1/create/item', item).then((response) => {
             console.log(response)
             self.sucesso = 'Sucesso para incluir item'
             self.lugares.titulo = ''
