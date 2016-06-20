@@ -12,7 +12,12 @@ export default {
 
   login(context, creds, redirect) {
     context.$http.post(LOGIN_URL, creds, (data) => {
-      localStorage.setItem('id_token', data.token)
+      //localStorage.setItem('id_token', data.token)
+      localforage.setItem('id_token', data.token).then((result) => {
+        console.log(result)
+      }).catch((err) => {
+        console.log(err);
+      })
 
       this.user.authenticated = true
       this.user.id = data.id
@@ -27,7 +32,12 @@ export default {
 
   signup(context, creds, redirect) {
     context.$http.post(SIGNUP_URL, creds, (data) => {
-      localStorage.setItem('id_token', data.token)
+      //localStorage.setItem('id_token', data.token)
+      localforage.setItem('id_token', data.token).then((result) => {
+        console.log(result)
+      }).catch((err) => {
+        console.log(err);
+      })
 
       this.user.authenticated = true
 
@@ -40,24 +50,39 @@ export default {
   },
 
   logout() {
-    localStorage.removeItem('id_token')
+    //localStorage.removeItem('id_token')
+    localforage.removeItem('id_token').then((result) => {
+      console.log('token removido')
+    }).catch((err) => {
+      console.log(err);
+    })
     this.user.authenticated = false
   },
 
   checkAuth() {
-    var jwt = localStorage.getItem('id_token')
+    /*var jwt = localStorage.getItem('id_token')
     if(jwt) {
       this.user.authenticated = true
     }
     else {
       this.user.authenticated = false
-    }
+    }*/
+    localforage.getItem('id_token', (err, result) => {
+      if(result){
+        this.user.authenticated = true
+      }else{
+        this.user.authenticated = false
+      }
+    })
   },
 
   getAuthHeader() {
-    return {
-      'Authorization': 'Bearer ' + localStorage.getItem('id_token')
-    }
+    //return {
+      //'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+    //}
+    localforage.getItem('id_token', (err, result) => {
+      //return 'Authorization': 'Bearer '+result
+    })
   }
 
 }

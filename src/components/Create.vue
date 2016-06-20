@@ -25,7 +25,6 @@
 <script lang="babel">
 import { router } from '../index'
 import auth from '../auth'
-import chaves from './../../chaves'
 
 export default {
   data() {

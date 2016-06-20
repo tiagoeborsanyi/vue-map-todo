@@ -11,7 +11,11 @@ Vue.use(VueResource)
 Vue.use(VueRouter)
 
 import auth from './auth'
-Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token')
+localforage.getItem('id_token', (err, result) => {
+  Vue.http.headers.common['Authorization'] = 'Bearer ' + result
+  console.log(result);
+})
+
 Vue.http.options.emulateJSON = true;
 Vue.http.options.emulateHTTP = true;
 
