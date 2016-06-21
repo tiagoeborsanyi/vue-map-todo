@@ -109,16 +109,21 @@ export default {
           //item.author_id = auth.user.id;
           localforage.getItem('id_user', (err, result) => {
             item.author_id = result
-            self.$http.post(auth.api.url+'v1/create/item', item).then((response) => {
-              console.log(response)
-              self.sucesso = 'Sucesso para incluir item'
-              self.lugares.titulo = ''
-              self.lugares.descricao = ''
-              self.lugares.endereco = ''
-            }, (err) => {
-              console.log(err)
+            if(item.titulo.length > 0 && item.descricao.length > 0 && item.endereco.length > 0 && item.author_id.length > 0){
+              self.$http.post(auth.api.url+'v1/create/item', item).then((response) => {
+                console.log(response)
+                self.sucesso = 'Sucesso para incluir item'
+                self.lugares.titulo = ''
+                self.lugares.descricao = ''
+                self.lugares.endereco = ''
+              }, (err) => {
+                console.log(err)
+                self.error = 'Erro para incluir item'
+              })
+            }else{
               self.error = 'Erro para incluir item'
-            })
+            }
+
           })
 
         }else{

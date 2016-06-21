@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div v-for="item in itens">
-        <div v-if="user.authenticated && user.id == item.author_id">
+        <div v-if="user.authenticated && user_id == item.author_id">
           <div class="col-md-4" style="height:300px">
             <div class="thumbnail">
               <img src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{item.local.geometry.location}}&key=AIzaSyCh0etpX30AJEq9ln7cEnuAkVJ6ka-blNY" alt="">
@@ -51,7 +51,8 @@
         photo: '',
         user: auth.user,
         error: '',
-        sucesso: ''
+        sucesso: '',
+        user_id: ''
       }
     },
     ready() {
@@ -62,6 +63,10 @@
         console.log(data.data[0].local.geometry.location)
       }, (err) => console.log(err))
       console.log('READY');
+      localforage.getItem('id_user', (err, result) => {
+        if (err) throw console.log(err)
+        self.user_id = result
+      })
     },
     beforeCompile() {
       this.itens = []
