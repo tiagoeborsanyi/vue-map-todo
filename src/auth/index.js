@@ -23,8 +23,14 @@ export default {
         console.log(err);
       })
 
+      localforage.setItem('id_user', data.id).then((result) => {
+        console.log(result);
+      }).catch((err) => {
+        console.log(err);
+      })
+
       this.user.authenticated = true
-      this.user.id = data.id
+      //this.user.id = data.id
 
       if (redirect) {
         router.go(redirect)

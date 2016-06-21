@@ -106,18 +106,21 @@ export default {
       }, function (result, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           item.local = result[0];
-          item.author_id = auth.user.id;
-          console.log(item);
-          self.$http.post(auth.api.url+'v1/create/item', item).then((response) => {
-            console.log(response)
-            self.sucesso = 'Sucesso para incluir item'
-            self.lugares.titulo = ''
-            self.lugares.descricao = ''
-            self.lugares.endereco = ''
-          }, (err) => {
-            console.log(err)
-            self.error = 'Erro para incluir item'
+          //item.author_id = auth.user.id;
+          localforage.getItem('id_user', (err, result) => {
+            item.author_id = result
+            self.$http.post(auth.api.url+'v1/create/item', item).then((response) => {
+              console.log(response)
+              self.sucesso = 'Sucesso para incluir item'
+              self.lugares.titulo = ''
+              self.lugares.descricao = ''
+              self.lugares.endereco = ''
+            }, (err) => {
+              console.log(err)
+              self.error = 'Erro para incluir item'
+            })
           })
+
         }else{
           console.log('erro geocode.');
         }
