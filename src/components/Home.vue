@@ -19,7 +19,7 @@
                   <h3>{{item.titulo}}</h3>
                   <p>{{item.endereco}}</p>
                 </a>
-                <button type="button" class="btn btn-danger btn-xs" @click="deletar(item.id)">Deletar</button>
+                <button type="button" class="btn btn-danger btn-xs" @click="deletar(item.author_id)">Deletar</button>
               </div>
             </div>
           </div>
@@ -58,14 +58,14 @@
     ready() {
       this.itens = []
       let self = this
-      this.$http.get(auth.api.url+'v1/itens').then((data) => {
-        this.itens = data.data
-        console.log(data.data[0].local.geometry.location)
-      }, (err) => console.log(err))
-      console.log('READY');
       localforage.getItem('id_user', (err, result) => {
         if (err) throw console.log(err)
         self.user_id = result
+        this.$http.get(auth.api.url+'v1/itens').then((data) => {
+          this.itens = data.data
+          console.log(data.data[0].local.geometry.location)
+        }, (err) => console.log(err))
+        console.log('READY');
       })
     },
     beforeCompile() {

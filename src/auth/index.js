@@ -70,13 +70,6 @@ export default {
   },
 
   checkAuth() {
-    /*var jwt = localStorage.getItem('id_token')
-    if(jwt) {
-      this.user.authenticated = true
-    }
-    else {
-      this.user.authenticated = false
-    }*/
     localforage.getItem('id_token', (err, result) => {
       if(result){
         this.user.authenticated = true
@@ -87,9 +80,6 @@ export default {
   },
 
   getAuthHeader() {
-    //return {
-      //'Authorization': 'Bearer ' + localStorage.getItem('id_token')
-    //}
     localforage.getItem('id_token', (err, result) => {
       //return 'Authorization': 'Bearer '+result
     })
